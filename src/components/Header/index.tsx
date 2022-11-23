@@ -1,12 +1,17 @@
-import { HeaderContainer } from "./styles";
+import { MapPin } from 'phosphor-react'
+import { Cart } from '../assets'
+import { HeaderContainer, LocationStyle } from './styles'
 
-export function Header(){
+export function Header() {
   return (
     <HeaderContainer>
-      <div>Logo</div>
+      <img src="./assets/Logo.svg" alt="" />
       <div>
-        <div>Cidade</div>
-        <div>Carrinho</div>
+        <LocationStyle>
+          <MapPin size={22} weight="fill" />
+          <span>Porto Alegre, RS</span>
+        </LocationStyle>
+        <Cart />
       </div>
     </HeaderContainer>
   )
