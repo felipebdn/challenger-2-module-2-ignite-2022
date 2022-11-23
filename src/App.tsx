@@ -9,6 +9,9 @@ export function App() {
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
         <Router/>
+        <button type='button' value="botão" id='botão' onClick={()=>console.log("nome")}>
+
+        </button>
       </BrowserRouter>
       <GlobalStyle />
     </ThemeProvider>
