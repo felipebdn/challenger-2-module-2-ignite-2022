@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const HeaderContainer = styled.header`
   width: 100vw;
-  padding: 2rem 10rem;
+  padding: 2rem 15rem;
   background: #262626;
   /* background: ${(props) => props.theme.base.background}; */
   display: flex;

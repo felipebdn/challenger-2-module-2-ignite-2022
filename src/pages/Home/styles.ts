@@ -1,46 +1,55 @@
 import styled from 'styled-components'
 
-export const HomeContainer = styled.section`
-  padding: 0 10rem;
+export const HomeContainer = styled.div`
+  width: 100vw;
+  padding: 0 15rem;
+  background: ${(props) => props.theme.base['base-hover']};
+`
+export const SectionApresentation = styled.section`
   width: 100%;
   display: flex;
-
-  div {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-  }
+`
+export const HalfSection = styled.div`
+  width: 50%;
 `
 
-export const TitulosHome = styled.div`
-  width: 100%;
+export const Titles = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
   h1 {
-    width: 100%;
-    color: ${(props) => props.theme.base['base-title']};
-    font-size: 3rem;
     font-family: 'Baloo 2';
-    line-height: 130%;
-    font-weight: 800;
     font-style: normal;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 130%;
+    color: ${(props) => props.theme.base['base-title']};
   }
   p {
-    width: 100%;
-    color: ${(props) => props.theme.base['base-subtitle']};
+    font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
-    font-size: 1.25rem;
+    font-size: 20px;
     line-height: 130%;
+    color: ${(props) => props.theme.base['base-subtitle']};
   }
 `
-
-export const Descriptions = styled.div`
+export const Atributos = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: row;
+`
+
+export const HalfAtributes = styled.div`
+  width: 50%;
 
   div {
-    width: 50%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+
+    div {
+      padding: 0.5rem;
+    }
   }
 `
