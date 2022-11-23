@@ -1,5 +1,5 @@
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
-import { HomeContainer, TitulosHome } from './styles'
+import { Descriptions, HomeContainer, TitulosHome } from './styles'
 
 export function Home() {
   return (
@@ -12,7 +12,7 @@ export function Home() {
             hora
           </p>
         </TitulosHome>
-        <div>
+        <Descriptions>
           <div>
             <div>
               <ShoppingCart size={16} weight="fill" />
@@ -33,7 +33,7 @@ export function Home() {
               <span>O café chega fresquinho até você</span>
             </div>
           </div>
-        </div>
+        </Descriptions>
       </div>
       <div>
         <img src="./assets/coffeeHome.svg" alt="" />
