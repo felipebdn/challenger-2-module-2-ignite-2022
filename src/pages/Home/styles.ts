@@ -44,3 +44,23 @@ export const TitleHome = styled.div`
     color: ${(props) => props.theme.base['base-subtitle']};
   }
 `
+export const AtributesCoffee = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+
+  aside {
+    display: flex;
+    flex-direction: column;
+  }
+`
+export const CartHomeHeader = styled.span`
+  display: flex;
+  flex-direction: row;
+
+  svg {
+    padding: 0.5rem;
+    border-radius: 999px;
+    background: ${(props) => props.theme.base['base-title']};
+  }
+`
