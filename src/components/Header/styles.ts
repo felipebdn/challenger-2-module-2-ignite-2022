@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const HeaderContainer = styled.header`
-  width: 100vw;
+  width: 100%;
   padding: 2rem 15rem;
   background: #262626;
   /* background: ${(props) => props.theme.base.background}; */
