@@ -24,3 +24,42 @@ export const CartContainer = styled.button`
     margin-left: 1rem;
   }
 `
+export const InputNumberContainer = styled.div`
+  display: flex;
+  padding: 0.5rem;
+  border-radius: 6px;
+  gap: 0 !important;
+  background: ${(props) => props.theme.base['base-button']};
+
+  input,
+  button {
+    border: none;
+    background: none;
+  }
+  button {
+    display: flex;
+    align-items: center;
+    outline: none;
+  }
+
+  input {
+    max-width: 50px;
+
+    text-align: center;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 130%;
+    color: ${(props) => props.theme.base['base-title']};
+
+    -webkit-appearance: textfield !important;
+    -moz-appearance: textfield !important;
+    appearance: textfield !important;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+    }
+  }
+`

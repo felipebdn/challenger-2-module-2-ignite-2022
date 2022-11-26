@@ -4,11 +4,9 @@ import {
   Bank,
   CreditCard,
   Money,
-  Minus,
-  Plus,
   Trash,
 } from 'phosphor-react'
-import { InputNumber } from '../Home/styles'
+import { InputNumber } from '../../components/assets'
 import {
   CheckoutContainer,
   CoffeeCart,
@@ -55,20 +53,18 @@ export function Checkout() {
             </div>
           </header>
           <main>
-            <div>
-              <div>
-                <CreditCard size={22} />
-                <span>Cartão de crédito</span>
-              </div>
-              <div>
-                <Bank size={22} />
-                <span>cartão de débito</span>
-              </div>
-              <div>
-                <Money size={22} />
-                <span>dinheiro</span>
-              </div>
-            </div>
+            <button>
+              <CreditCard size={22} />
+              <span>cartão de crédito</span>
+            </button>
+            <button>
+              <Bank size={22} />
+              <span>cartão de débito</span>
+            </button>
+            <button>
+              <Money size={22} />
+              <span>dinheiro</span>
+            </button>
           </main>
         </FormPayment>
       </main>
@@ -76,22 +72,14 @@ export function Checkout() {
         <h1>Cafés selecionados</h1>
         <FormOrder>
           <CoffeeCart>
-            <img src="" alt="" />
+            <img src="./assets/coffees/latte.svg" alt="" />
             <div>
               <div>
                 <h2>Expresso Tradicional</h2>
                 <span>R$ 9,90</span>
               </div>
               <main>
-                <InputNumber>
-                  <button>
-                    <Minus size={14} weight="bold" />
-                  </button>
-                  <input type="number" value={1} name="" id="" disabled />
-                  <button>
-                    <Plus size={14} weight="bold" />
-                  </button>
-                </InputNumber>
+                <InputNumber />
                 <button>
                   <Trash size={22} />
                   Remover
