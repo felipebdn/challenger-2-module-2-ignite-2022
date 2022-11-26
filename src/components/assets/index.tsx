@@ -1,5 +1,5 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
-import { CartContainer } from './styles'
+import { CartContainer, InputNumberContainer } from './styles'
 
 export function Cart() {
   return (
@@ -11,7 +11,7 @@ export function Cart() {
 }
 export function InputNumber() {
   return (
-    <>
+    <InputNumberContainer>
       <button>
         <Minus size={14} weight="bold" />
       </button>
@@ -19,6 +19,6 @@ export function InputNumber() {
       <button>
         <Plus size={14} weight="bold" />
       </button>
-    </>
+    </InputNumberContainer>
   )
 }

@@ -9,26 +9,32 @@ import {
 import { InputNumber } from '../../components/assets'
 import {
   CheckoutContainer,
+  CheckoutLeft,
+  CheckoutRight,
   CoffeeCart,
   FormEndereco,
   FormOrder,
   FormPayment,
+  InputsForm,
+  BlocoInfoCoffee,
+  RemoverButton,
+  ValuesOrderCoffees,
 } from './styles'
 
 export function Checkout() {
   return (
     <CheckoutContainer>
-      <main>
+      <CheckoutLeft>
         <h1>Complete seu pedido</h1>
         <FormEndereco>
-          <header>
+          <aside>
             <MapPin size={22} />
             <div>
               <h2>Endereço de Entrega</h2>
               <p>Informe o endereço onde deseja receber seu pedido</p>
             </div>
-          </header>
-          <main>
+          </aside>
+          <InputsForm>
             <input type="number" name="" id="" placeholder="CEP" />
             <input type="text" name="" id="" placeholder="Rua" />
             <div>
@@ -40,7 +46,7 @@ export function Checkout() {
               <input type="text" name="" id="" placeholder="Cidade" />
               <input type="text" name="" id="" placeholder="UF" />
             </div>
-          </main>
+          </InputsForm>
         </FormEndereco>
         <FormPayment>
           <header>
@@ -67,28 +73,59 @@ export function Checkout() {
             </button>
           </main>
         </FormPayment>
-      </main>
-      <main>
+      </CheckoutLeft>
+      <CheckoutRight>
         <h1>Cafés selecionados</h1>
         <FormOrder>
           <CoffeeCart>
             <img src="./assets/coffees/latte.svg" alt="" />
-            <div>
+            <BlocoInfoCoffee>
               <div>
                 <h2>Expresso Tradicional</h2>
                 <span>R$ 9,90</span>
               </div>
               <main>
                 <InputNumber />
-                <button>
-                  <Trash size={22} />
-                  Remover
-                </button>
+                <RemoverButton>
+                  <Trash size={17} />
+                  <span>Remover</span>
+                </RemoverButton>
               </main>
-            </div>
+            </BlocoInfoCoffee>
           </CoffeeCart>
+          {/* <CoffeeCart>
+            <img src="./assets/coffees/latte.svg" alt="" />
+            <BlocoInfoCoffee>
+              <div>
+                <h2>Expresso Tradicional</h2>
+                <span>R$ 9,90</span>
+              </div>
+              <main>
+                <InputNumber />
+                <RemoverButton>
+                  <Trash size={17} />
+                  <span>Remover</span>
+                </RemoverButton>
+              </main>
+            </BlocoInfoCoffee>
+          </CoffeeCart> */}
+          <ValuesOrderCoffees>
+            <div>
+              <p>Total de itens</p>
+              <span>R$ 29,70</span>
+            </div>
+            <div>
+              <p>Entrega</p>
+              <span>R$ 3,50</span>
+            </div>
+            <div>
+              <p>Total</p>
+              <span>R$ 33,20</span>
+            </div>
+            <button>confirmar pedido</button>
+          </ValuesOrderCoffees>
         </FormOrder>
-      </main>
+      </CheckoutRight>
     </CheckoutContainer>
   )
 }

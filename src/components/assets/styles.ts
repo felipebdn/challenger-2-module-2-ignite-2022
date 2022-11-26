@@ -30,6 +30,7 @@ export const InputNumberContainer = styled.div`
   border-radius: 6px;
   gap: 0 !important;
   background: ${(props) => props.theme.base['base-button']};
+  max-width: 7rem;
 
   input,
   button {
@@ -40,6 +41,7 @@ export const InputNumberContainer = styled.div`
     display: flex;
     align-items: center;
     outline: none;
+    color: ${(props) => props.theme.produto.purple};
   }
 
   input {

@@ -1,12 +1,5 @@
-import {
-  Coffee,
-  Minus,
-  Package,
-  Plus,
-  ShoppingCart,
-  Timer,
-} from 'phosphor-react'
-import { Cart } from '../../components/assets'
+import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
+import { Cart, InputNumber } from '../../components/assets'
 import { defaultTheme } from '../../Global/themes/default'
 import { v4 as uuidv4 } from 'uuid'
 import {
@@ -18,7 +11,6 @@ import {
   TitleHome,
   HeaderCoffees,
   FooterCoffees,
-  InputNumber,
 } from './styles'
 import { useState } from 'react'
 
@@ -155,34 +147,34 @@ export function Home() {
     },
   ])
 
-  function handleRemoveUnityCoffee(id: string, qtd: number) {
-    setCoffees(
-      coffees.map((state) => {
-        if (state.id === id) {
-          if (state.qtd === 1) {
-            return state
-          }
-          const quantidade = state.qtd - 1
-          return { ...state, qtd: quantidade }
-        } else {
-          return state
-        }
-      }),
-    )
-  }
+  // function handleRemoveUnityCoffee(id: string, qtd: number) {
+  //   setCoffees(
+  //     coffees.map((state) => {
+  //       if (state.id === id) {
+  //         if (state.qtd === 1) {
+  //           return state
+  //         }
+  //         const quantidade = state.qtd - 1
+  //         return { ...state, qtd: quantidade }
+  //       } else {
+  //         return state
+  //       }
+  //     }),
+  //   )
+  // }
 
-  function handleAddUnityCoffee(id: string, qtd: number) {
-    setCoffees(
-      coffees.map((state) => {
-        if (state.id === id) {
-          const quantidade = state.qtd + 1
-          return { ...state, qtd: quantidade }
-        } else {
-          return state
-        }
-      }),
-    )
-  }
+  // function handleAddUnityCoffee(id: string, qtd: number) {
+  //   setCoffees(
+  //     coffees.map((state) => {
+  //       if (state.id === id) {
+  //         const quantidade = state.qtd + 1
+  //         return { ...state, qtd: quantidade }
+  //       } else {
+  //         return state
+  //       }
+  //     }),
+  //   )
+  // }
   return (
     <>
       <HomeContainer>
@@ -250,7 +242,7 @@ export function Home() {
                     R$ <span>{state.valorUnidade}</span>
                   </p>
                   <div>
-                    <InputNumber>
+                    {/* <InputNumber>
                       <button
                         onClick={() => handleRemoveUnityCoffee(state.id, 1)}
                       >
@@ -266,7 +258,8 @@ export function Home() {
                       <button onClick={() => handleAddUnityCoffee(state.id, 1)}>
                         <Plus size={14} weight="bold" />
                       </button>
-                    </InputNumber>
+                    </InputNumber> */}
+                    <InputNumber />
                     <Cart />
                   </div>
                 </FooterCoffees>

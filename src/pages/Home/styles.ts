@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const HomeContainer = styled.div`
   width: 100%;
   padding: 5rem 15rem 2rem;
-  background: ${(props) => props.theme.base['base-hover']};
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -80,7 +79,6 @@ export const CartHomeHeader = styled.div<Props>`
 export const HomeCoffees = styled.div`
   width: 100%;
   padding: 2rem 15rem;
-  background: ${(props) => props.theme.base['base-hover']};
   display: flex;
   flex-direction: column;
   gap: 2.125rem;
@@ -112,6 +110,7 @@ export const CartCoffes = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 1.25rem;
+  border-radius: 6px 36px;
   height: 23rem;
 `
 export const HeaderCoffees = styled.div`
