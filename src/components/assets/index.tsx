@@ -9,6 +9,7 @@ export function Cart() {
     </CartContainer>
   )
 }
+
 export function InputNumber() {
   return (
     <InputNumberContainer>
