@@ -143,24 +143,33 @@ const coffees = [
   },
 ]
 
+/**
+ *  id: uuidv4(),
+    img: 'expressoTradicional',
+    typeCoffee: ['tradicional'],
+    title: 'Expresso Tradicional',
+    subtitle: 'O tradicional café feito com água quente e grãos moídos',
+    valorUnidade: 9.9,
+    qtd: 1,
+ */
+type typeCoffee = {
+  type: string
+}
+
+interface coffeesCartProps {
+  id: string
+  img: string
+  typeCoffee: typeCoffee[]
+  title: string
+  subtitle: string
+  valorUnidade: number
+  qtd: number
+}
+
 export function Home() {
   const [coffeesCart, setCoffeesCart] = useState()
 
-  function handleRemoveUnityCoffee(id: string, qtd: number) {
-    setCoffees(
-      coffees.map((state) => {
-        if (state.id === id) {
-          if (state.qtd === 1) {
-            return state
-          }
-          const quantidade = state.qtd - 1
-          return { ...state, qtd: quantidade }
-        } else {
-          return state
-        }
-      }),
-    )
-  }
+  function handleRemoveUnityCoffee(add: string) {}
 
   // function handleAddUnityCoffee(id: string, qtd: number) {
   //   setCoffees(
@@ -258,7 +267,7 @@ export function Home() {
                         <Plus size={14} weight="bold" />
                       </button>
                     </InputNumber> */}
-                    <InputNumber funcaoAdd={} />
+                    <InputNumber funcaoAdd={handleRemoveUnityCoffee} />
                     <Cart />
                   </div>
                 </FooterCoffees>
