@@ -12,6 +12,7 @@ import {
   HeaderCoffees,
   FooterCoffees,
 } from './styles'
+import { useState } from 'react'
 
 const coffees = [
   {
@@ -143,21 +144,23 @@ const coffees = [
 ]
 
 export function Home() {
-  // function handleRemoveUnityCoffee(id: string, qtd: number) {
-  //   setCoffees(
-  //     coffees.map((state) => {
-  //       if (state.id === id) {
-  //         if (state.qtd === 1) {
-  //           return state
-  //         }
-  //         const quantidade = state.qtd - 1
-  //         return { ...state, qtd: quantidade }
-  //       } else {
-  //         return state
-  //       }
-  //     }),
-  //   )
-  // }
+  const [coffeesCart, setCoffeesCart] = useState()
+
+  function handleRemoveUnityCoffee(id: string, qtd: number) {
+    setCoffees(
+      coffees.map((state) => {
+        if (state.id === id) {
+          if (state.qtd === 1) {
+            return state
+          }
+          const quantidade = state.qtd - 1
+          return { ...state, qtd: quantidade }
+        } else {
+          return state
+        }
+      }),
+    )
+  }
 
   // function handleAddUnityCoffee(id: string, qtd: number) {
   //   setCoffees(
@@ -255,7 +258,7 @@ export function Home() {
                         <Plus size={14} weight="bold" />
                       </button>
                     </InputNumber> */}
-                    <InputNumber />
+                    <InputNumber funcaoAdd={} />
                     <Cart />
                   </div>
                 </FooterCoffees>
