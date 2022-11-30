@@ -24,44 +24,44 @@ export const CartContainer = styled.button`
     margin-left: 1rem;
   }
 `
-export const InputNumberContainer = styled.div`
-  display: flex;
-  padding: 0.5rem;
-  border-radius: 6px;
-  gap: 0 !important;
-  background: ${(props) => props.theme.base['base-button']};
-  max-width: 7rem;
+// export const InputNumberContainer = styled.div`
+//   display: flex;
+//   padding: 0.5rem;
+//   border-radius: 6px;
+//   gap: 0 !important;
+//   background: ${(props) => props.theme.base['base-button']};
+//   max-width: 7rem;
 
-  input,
-  button {
-    border: none;
-    background: none;
-  }
-  button {
-    display: flex;
-    align-items: center;
-    outline: none;
-    color: ${(props) => props.theme.produto.purple};
-  }
+//   input,
+//   button {
+//     border: none;
+//     background: none;
+//   }
+//   button {
+//     display: flex;
+//     align-items: center;
+//     outline: none;
+//     color: ${(props) => props.theme.produto.purple};
+//   }
 
-  input {
-    max-width: 50px;
+//   input {
+//     max-width: 50px;
 
-    text-align: center;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 1rem;
-    line-height: 130%;
-    color: ${(props) => props.theme.base['base-title']};
+//     text-align: center;
+//     font-family: 'Roboto';
+//     font-style: normal;
+//     font-weight: 500;
+//     font-size: 1rem;
+//     line-height: 130%;
+//     color: ${(props) => props.theme.base['base-title']};
 
-    -webkit-appearance: textfield !important;
-    -moz-appearance: textfield !important;
-    appearance: textfield !important;
+//     -webkit-appearance: textfield !important;
+//     -moz-appearance: textfield !important;
+//     appearance: textfield !important;
 
-    &::-webkit-inner-spin-button,
-    &::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-    }
-  }
-`
+//     &::-webkit-inner-spin-button,
+//     &::-webkit-outer-spin-button {
+//       -webkit-appearance: none;
+//     }
+//   }
+// `

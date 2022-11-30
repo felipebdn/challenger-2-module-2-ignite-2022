@@ -1,6 +1,5 @@
-import { Minus, Plus, ShoppingCart } from 'phosphor-react'
-import { useState } from 'react'
-import { CartContainer, InputNumberContainer } from './styles'
+import { ShoppingCart } from 'phosphor-react'
+import { CartContainer } from './styles'
 
 export function Cart() {
   return (
@@ -11,21 +10,17 @@ export function Cart() {
   )
 }
 
-interface InputNumberProps {
-  funcaoAdd: (id: string) => void
-}
-
-export function InputNumber({ funcaoAdd }: InputNumberProps) {
-  const [number, setNumber] = useState(1)
+export function InputNumber() {
   return (
-    <InputNumberContainer>
-      <button onClick={() => funcaoAdd('add')}>
-        <Minus size={14} weight="bold" />
-      </button>
-      <input type="number" value={number} name="" id="" disabled />
-      <button>
-        <Plus size={14} weight="bold" />
-      </button>
-    </InputNumberContainer>
+    <></>
+    // <InputNumberContainer>
+    //   <button>
+    //     <Minus size={14} weight="bold" />
+    //   </button>
+    //   <input type="number" value={1} name="" id="" disabled />
+    //   <button>
+    //     <Plus size={14} weight="bold" />
+    //   </button>
+    // </InputNumberContainer>
   )
 }

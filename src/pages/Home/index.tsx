@@ -1,7 +1,13 @@
-import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
-import { Cart, InputNumber } from '../../components/assets'
-import { defaultTheme } from '../../Global/themes/default'
+import {
+  Coffee,
+  Minus,
+  Package,
+  Plus,
+  ShoppingCart,
+  Timer,
+} from 'phosphor-react'
 import { v4 as uuidv4 } from 'uuid'
+import { defaultTheme } from '../../Global/themes/default'
 import {
   AtributesCoffee,
   CartCoffes,
@@ -11,10 +17,23 @@ import {
   TitleHome,
   HeaderCoffees,
   FooterCoffees,
+  InputNumberContainer,
+  CartContainerHome,
 } from './styles'
 import { useState } from 'react'
 
-const coffees = [
+interface CoffeesProps {
+  id: string
+  img: string
+  typeCoffee: string[]
+  title: string
+  subtitle: string
+  valorUnidade: number
+  qtd: number
+  inCart?: boolean
+}
+
+const coffeesArray = [
   {
     id: uuidv4(),
     img: 'expressoTradicional',
@@ -143,46 +162,36 @@ const coffees = [
   },
 ]
 
-/**
- *  id: uuidv4(),
-    img: 'expressoTradicional',
-    typeCoffee: ['tradicional'],
-    title: 'Expresso Tradicional',
-    subtitle: 'O tradicional café feito com água quente e grãos moídos',
-    valorUnidade: 9.9,
-    qtd: 1,
- */
-type typeCoffee = {
-  type: string
-}
-
-interface coffeesCartProps {
-  id: string
-  img: string
-  typeCoffee: typeCoffee[]
-  title: string
-  subtitle: string
-  valorUnidade: number
-  qtd: number
-}
-
 export function Home() {
-  const [coffeesCart, setCoffeesCart] = useState()
+  const [coffees, setCoffees] = useState<CoffeesProps[]>(coffeesArray)
+  function handleAddCoffeeCart(id: string) {
+    setCoffees(
+      coffees.map((state) => {
+        if (state.id === id) {
+          return { ...state, inCart: true }
+        } else {
+          return state
+        }
+      }),
+    )
+  }
 
-  function handleRemoveUnityCoffee(add: string) {}
+  function handleAddUnityCoffee(id: string, cond: boolean) {
+    setCoffees(
+      coffees.map((state) => {
+        if (state.id === id) {
+          const quantidade = state.qtd + (cond ? 1 : -1)
+          if (quantidade < 1) {
+            return state
+          }
+          return { ...state, qtd: quantidade }
+        } else {
+          return state
+        }
+      }),
+    )
+  }
 
-  // function handleAddUnityCoffee(id: string, qtd: number) {
-  //   setCoffees(
-  //     coffees.map((state) => {
-  //       if (state.id === id) {
-  //         const quantidade = state.qtd + 1
-  //         return { ...state, qtd: quantidade }
-  //       } else {
-  //         return state
-  //       }
-  //     }),
-  //   )
-  // }
   return (
     <>
       <HomeContainer>
@@ -232,7 +241,7 @@ export function Home() {
       <HomeCoffees>
         <h1>Nossos cafés</h1>
         <section>
-          {coffees.map((state) => {
+          {coffees.map((state, i, array) => {
             return (
               <CartCoffes key={state.id}>
                 <HeaderCoffees>
@@ -250,25 +259,30 @@ export function Home() {
                     R$ <span>{state.valorUnidade}</span>
                   </p>
                   <div>
-                    {/* <InputNumber>
+                    <InputNumberContainer>
                       <button
-                        onClick={() => handleRemoveUnityCoffee(state.id, 1)}
+                        onClick={() => handleAddUnityCoffee(state.id, false)}
                       >
                         <Minus size={14} weight="bold" />
                       </button>
                       <input
                         type="number"
+                        value={state.qtd}
                         name=""
                         id=""
                         disabled
-                        value={state.qtd}
                       />
-                      <button onClick={() => handleAddUnityCoffee(state.id, 1)}>
+                      <button
+                        onClick={() => handleAddUnityCoffee(state.id, true)}
+                      >
                         <Plus size={14} weight="bold" />
                       </button>
-                    </InputNumber> */}
-                    <InputNumber funcaoAdd={handleRemoveUnityCoffee} />
-                    <Cart />
+                    </InputNumberContainer>
+                    <CartContainerHome
+                      onClick={() => handleAddCoffeeCart(state.id)}
+                    >
+                      <ShoppingCart size={22} weight="fill" />
+                    </CartContainerHome>
                   </div>
                 </FooterCoffees>
               </CartCoffes>

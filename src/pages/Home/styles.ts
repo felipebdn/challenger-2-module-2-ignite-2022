@@ -200,3 +200,55 @@ export const FooterCoffees = styled.div`
     gap: 0.5rem;
   }
 `
+export const InputNumberContainer = styled.div`
+  display: flex;
+  padding: 0.5rem;
+  border-radius: 6px;
+  gap: 0 !important;
+  background: ${(props) => props.theme.base['base-button']};
+  max-width: 7rem;
+
+  input,
+  button {
+    border: none;
+    background: none;
+  }
+  button {
+    display: flex;
+    align-items: center;
+    outline: none;
+    color: ${(props) => props.theme.produto.purple};
+  }
+
+  input {
+    max-width: 50px;
+
+    text-align: center;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 130%;
+    color: ${(props) => props.theme.base['base-title']};
+
+    -webkit-appearance: textfield !important;
+    -moz-appearance: textfield !important;
+    appearance: textfield !important;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+    }
+  }
+`
+export const CartContainerHome = styled.button`
+  padding: 0.5rem;
+  border-radius: 6px;
+  background: ${(props) => props.theme.produto['yellow-light']};
+  color: ${(props) => props.theme.produto['yellow-dark']};
+  position: relative;
+  border: none;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+`
