@@ -1,11 +1,15 @@
 import { ShoppingCart } from 'phosphor-react'
+import { useContext } from 'react'
+import { CoffeesContext } from '../../context/CoffeesContext'
 import { CartContainer } from './styles'
 
 export function Cart() {
+  const { totalCoffesCart } = useContext(CoffeesContext)
+
   return (
     <CartContainer>
       <ShoppingCart size={22} weight="fill" />
-      <span>33</span>
+      <span>{totalCoffesCart}</span>
     </CartContainer>
   )
 }
