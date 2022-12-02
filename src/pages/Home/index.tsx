@@ -23,8 +23,7 @@ import {
 } from './styles'
 
 export function Home() {
-  const { coffees, handleAddCoffeeCart, handleAddUnityCoffee } =
-    useContext(CoffeesContext)
+  const { coffees, changeUnityCoffee } = useContext(CoffeesContext)
 
   return (
     <>
@@ -95,19 +94,17 @@ export function Home() {
                   <div>
                     <InputNumberContainer>
                       <button
-                        onClick={() => handleAddUnityCoffee(state.id, false)}
+                        onClick={() => changeUnityCoffee(state.id, false)}
                       >
                         <Minus size={14} weight="bold" />
                       </button>
                       <input type="number" value={state.qtd} disabled />
-                      <button
-                        onClick={() => handleAddUnityCoffee(state.id, true)}
-                      >
+                      <button onClick={() => changeUnityCoffee(state.id, true)}>
                         <Plus size={14} weight="bold" />
                       </button>
                     </InputNumberContainer>
                     <CartContainerHome
-                      onClick={() => handleAddCoffeeCart(state.id)}
+                    // onClick={() => handleAddCoffeeCart(state.id)}
                     >
                       <ShoppingCart size={22} weight="fill" />
                     </CartContainerHome>

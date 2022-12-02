@@ -1,72 +1,73 @@
+import { createContext, ReactNode, useEffect, useReducer } from 'react'
+import { incrementCoffee } from '../reducer/Coffees/actions'
 import {
-  createContext,
-  ReactNode,
-  useEffect,
-  useReducer,
-  useState,
-} from 'react'
-import { coffeesArray, CoffeesProps } from '../reducer/Coffees/reducer'
+  coffeesArray,
+  CoffeesProps,
+  CoffeesReducer,
+} from '../reducer/Coffees/reducer'
 
 interface CoffeesContextProviderProps {
   children: ReactNode
 }
 interface CoffeesContextType {
   coffees: CoffeesProps[]
-  setCoffees: (data: any) => void
-  handleAddCoffeeCart: (id: string) => void
-  handleAddUnityCoffee: (id: string, cond: boolean) => void
-  totalCoffesCart: number
+  // handleAddCoffeeCart: (id: string) => void
+  changeUnityCoffee: (id: string, cond: boolean) => void
+  totalCoffeesInCart: number
 }
 export const CoffeesContext = createContext({} as CoffeesContextType)
 
 export function CoffeesContextProvider({
   children,
 }: CoffeesContextProviderProps) {
+  const [stateCoffees, dispatch] = useReducer(CoffeesReducer, coffeesArray)
 
-  const { state, dispatch } = useReducer(reducer, coffeesArray)
-  const { coffess, totalCoffeesInCart } = state
+  const { totalCoffeesInCart, coffees } = stateCoffees
+
   useEffect(() => {
     const total = coffees.filter((coffee) => coffee.inCart)
     console.log(total.length)
-    setTotalCoffesCart(total.length)
   }, [coffees])
 
-  function handleAddCoffeeCart(id: string) {
-    setCoffees(
-      coffees.map((state) => {
-        if (state.id === id) {
-          return { ...state, inCart: true }
-        } else {
-          return state
-        }
-      }),
-    )
+  function changeUnityCoffee(id: string, cond: boolean) {
+    const cycleChange = { id, cond }
+    dispatch(incrementCoffee(cycleChange))
   }
 
-  function handleAddUnityCoffee(id: string, cond: boolean) {
-    setCoffees(
-      coffees.map((state) => {
-        if (state.id === id) {
-          const quantidade = state.qtd + (cond ? 1 : -1)
-          if (quantidade < 1) {
-            return state
-          }
-          return { ...state, qtd: quantidade }
-        } else {
-          return state
-        }
-      }),
-    )
-  }
+  // function handleAddCoffeeCart(id: string) {
+  //   setCoffees(
+  //     coffees.map((state) => {
+  //       if (state.id === id) {
+  //         return { ...state, inCart: true }
+  //       } else {
+  //         return state
+  //       }
+  //     }),
+  //   )
+  // }
+
+  // function handleAddUnityCoffee(id: string, cond: boolean) {
+  //   setCoffees(
+  //     coffees.map((state) => {
+  //       if (state.id === id) {
+  //         const quantidade = state.qtd + (cond ? 1 : -1)
+  //         if (quantidade < 1) {
+  //           return state
+  //         }
+  //         return { ...state, qtd: quantidade }
+  //       } else {
+  //         return state
+  //       }
+  //     }),
+  //   )
+  // }
 
   return (
     <CoffeesContext.Provider
       value={{
         coffees,
-        totalCoffesCart,
-        setCoffees,
-        handleAddCoffeeCart,
-        handleAddUnityCoffee,
+        totalCoffeesInCart,
+        changeUnityCoffee,
       }}
     >
       {children}

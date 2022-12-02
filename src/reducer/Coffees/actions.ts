@@ -3,8 +3,14 @@ export enum ActionTypes {
   INCREMENT_COFFEE = 'INCREMENT_COFFEE',
   INCREMENT_COFFEE_IN_CART = 'INCREMENT_COFFEE_IN_CART',
 }
-export function incrementCoffee() {
+
+interface coffeeChange {
+  id: string
+  cond: boolean
+}
+export function incrementCoffee({ id, cond }: coffeeChange) {
   return {
     type: ActionTypes.INCREMENT_COFFEE,
+    payload: { id, cond },
   }
 }

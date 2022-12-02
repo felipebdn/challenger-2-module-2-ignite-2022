@@ -1,3 +1,4 @@
+import produce from 'immer'
 import { v4 as uuidv4 } from 'uuid'
 import { ActionTypes } from './actions'
 
@@ -13,7 +14,7 @@ export interface CoffeesProps {
 }
 interface CoffeesState {
   coffees: CoffeesProps[]
-  total: number
+  totalCoffeesInCart: number
 }
 export const coffeesArray = {
   totalCoffeesInCart: 0,
@@ -153,15 +154,15 @@ export const coffeesArray = {
 export function CoffeesReducer(state: CoffeesState, action: any) {
   switch (action.type) {
     case ActionTypes.DECREMENT_COFFEE: {
-      return 
-    }      
-    case ActionTypes.INCREMENT_COFFEE: {
-      return 
+      const currentCoffeeIndexI = state.coffees.findIndex((coffee) => {
+        return coffee.id === action.payload.id
+      })
+      return produce(state, (draft) => {
+        draft.coffees[currentCoffeeIndexI].qtd = action.payload.cond ? 1 : -1
+      })
     }
-    case ActionTypes.INCREMENT_COFFEE_IN_CART: {
-      return 
-    }
+
     default:
-      return
+      return state
   }
 }
