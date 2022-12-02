@@ -10,7 +10,7 @@ export interface CoffeesProps {
   subtitle: string
   valorUnidade: number
   qtd: number
-  inCart?: boolean
+  inCart: boolean
 }
 interface CoffeesState {
   coffees: CoffeesProps[]
@@ -27,6 +27,7 @@ export const coffeesArray = {
       subtitle: 'O tradicional café feito com água quente e grãos moídos',
       valorUnidade: 9.9,
       qtd: 1,
+      inCart: false,
     },
     {
       id: uuidv4(),
@@ -36,6 +37,7 @@ export const coffeesArray = {
       subtitle: 'Expresso diluído, menos intenso que o tradicional',
       valorUnidade: 9.9,
       qtd: 1,
+      inCart: false,
     },
     {
       id: uuidv4(),
@@ -45,6 +47,7 @@ export const coffeesArray = {
       subtitle: 'Café expresso tradicional com espuma cremosa',
       valorUnidade: 9.9,
       qtd: 1,
+      inCart: false,
     },
     {
       id: uuidv4(),
@@ -54,6 +57,7 @@ export const coffeesArray = {
       subtitle: 'Bebida preparada com café expresso e cubos de gelo',
       valorUnidade: 9.9,
       qtd: 1,
+      inCart: false,
     },
     {
       id: uuidv4(),
@@ -63,6 +67,7 @@ export const coffeesArray = {
       subtitle: 'Meio a meio de expresso tradicional com leite vaporizado',
       valorUnidade: 9.9,
       qtd: 1,
+      inCart: false,
     },
     {
       id: uuidv4(),
@@ -73,6 +78,7 @@ export const coffeesArray = {
         'Uma dose de café expresso com o dobro de leite e espuma cremosa',
       valorUnidade: 9.9,
       qtd: 1,
+      inCart: false,
     },
     {
       id: uuidv4(),
@@ -83,6 +89,7 @@ export const coffeesArray = {
         'Bebida com canela feita de doses iguais de café, leite e espuma',
       valorUnidade: 9.9,
       qtd: 1,
+      inCart: false,
     },
     {
       id: uuidv4(),
@@ -92,6 +99,7 @@ export const coffeesArray = {
       subtitle: 'Café expresso misturado com um pouco de leite quente e espuma',
       valorUnidade: 9.9,
       qtd: 1,
+      inCart: false,
     },
     {
       id: uuidv4(),
@@ -101,6 +109,7 @@ export const coffeesArray = {
       subtitle: 'Café expresso com calda de chocolate, pouco leite e espuma',
       valorUnidade: 9.9,
       qtd: 1,
+      inCart: false,
     },
     {
       id: uuidv4(),
@@ -110,6 +119,7 @@ export const coffeesArray = {
       subtitle: 'Bebida feita com chocolate dissolvido no leite quente e café',
       valorUnidade: 9.9,
       qtd: 1,
+      inCart: false,
     },
     {
       id: uuidv4(),
@@ -120,6 +130,7 @@ export const coffeesArray = {
         'Drink gelado de café expresso com rum, creme de leite e hortelã',
       valorUnidade: 9.9,
       qtd: 1,
+      inCart: false,
     },
     {
       id: uuidv4(),
@@ -129,6 +140,7 @@ export const coffeesArray = {
       subtitle: 'Bebida adocicada preparada com café e leite de coco',
       valorUnidade: 9.9,
       qtd: 1,
+      inCart: false,
     },
     {
       id: uuidv4(),
@@ -138,6 +150,7 @@ export const coffeesArray = {
       subtitle: 'Bebida preparada com grãos de café árabe e especiarias',
       valorUnidade: 9.9,
       qtd: 1,
+      inCart: false,
     },
     {
       id: uuidv4(),
@@ -147,6 +160,7 @@ export const coffeesArray = {
       subtitle: 'Bebida a base de café, uísque irlandês, açúcar e chantilly',
       valorUnidade: 9.9,
       qtd: 1,
+      inCart: false,
     },
   ],
 }
@@ -157,14 +171,21 @@ export function CoffeesReducer(state: CoffeesState, action: any) {
       const currentCoffeeIndexI = state.coffees.findIndex((coffee) => {
         return coffee.id === action.payload.id
       })
-      if (!state.coffees[currentCoffeeIndexI].inCart) {
-        state.coffees[currentCoffeeIndexI].inCart = true
-        return produce(state, (draft) => {
-          draft.totalCoffeesInCart = action.payload.cond ? +1 : -1
-        })
-      }
       return produce(state, (draft) => {
-        draft.totalCoffeesInCart = action.payload.cond ? +1 : -1
+        if (draft.coffees[currentCoffeeIndexI].inCart) {
+          draft.coffees[currentCoffeeIndexI].inCart = true
+        }
+        console.log(draft.coffees[currentCoffeeIndexI].qtd)
+
+        draft.coffees[currentCoffeeIndexI].qtd = action.payload.cond ? +1 : -1
+      })
+    }
+    case ActionTypes.INCREMENT_COFFEE_IN_CART: {
+      const currentByCoffeeInCart = state.coffees.filter((coffee) => {
+        return coffee.inCart === true
+      }).length
+      return produce(state, (draft) => {
+        draft.totalCoffeesInCart = currentByCoffeeInCart
       })
     }
     default:

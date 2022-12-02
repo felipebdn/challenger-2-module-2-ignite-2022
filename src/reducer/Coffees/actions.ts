@@ -8,9 +8,14 @@ interface coffeeChange {
   id: string
   cond: boolean
 }
-export function incrementCoffee({ id, cond }: coffeeChange) {
+export function changeAmountCoffee({ id, cond }: coffeeChange) {
   return {
     type: ActionTypes.CHANGE_NUMBER_COFFEE,
     payload: { id, cond },
+  }
+}
+export function calculateAmountCoffeeInCart() {
+  return {
+    type: ActionTypes.INCREMENT_COFFEE_IN_CART,
   }
 }

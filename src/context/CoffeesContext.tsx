@@ -1,5 +1,8 @@
 import { createContext, ReactNode, useEffect, useReducer } from 'react'
-import { incrementCoffee } from '../reducer/Coffees/actions'
+import {
+  calculateAmountCoffeeInCart,
+  changeAmountCoffee,
+} from '../reducer/Coffees/actions'
 import {
   coffeesArray,
   CoffeesProps,
@@ -14,7 +17,6 @@ interface CoffeesContextType {
   // handleAddCoffeeCart: (id: string) => void
   changeUnityCoffee: (id: string, cond: boolean) => void
   totalCoffeesInCart: number
-  total: number
 }
 export const CoffeesContext = createContext({} as CoffeesContextType)
 
@@ -25,10 +27,14 @@ export function CoffeesContextProvider({
 
   const { totalCoffeesInCart, coffees } = stateCoffees
 
+  useEffect(() => {
+    dispatch(calculateAmountCoffeeInCart())
+  }, [coffees])
+
   function changeUnityCoffee(id: string, cond: boolean) {
     const cycleChange = { id, cond }
 
-    dispatch(incrementCoffee(cycleChange))
+    dispatch(changeAmountCoffee(cycleChange))
   }
 
   // function handleAddCoffeeCart(id: string) {
@@ -62,7 +68,6 @@ export function CoffeesContextProvider({
   return (
     <CoffeesContext.Provider
       value={{
-        total,
         coffees,
         totalCoffeesInCart,
         changeUnityCoffee,
