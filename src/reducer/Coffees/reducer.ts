@@ -153,15 +153,20 @@ export const coffeesArray = {
 
 export function CoffeesReducer(state: CoffeesState, action: any) {
   switch (action.type) {
-    case ActionTypes.DECREMENT_COFFEE: {
+    case ActionTypes.CHANGE_NUMBER_COFFEE: {
       const currentCoffeeIndexI = state.coffees.findIndex((coffee) => {
         return coffee.id === action.payload.id
       })
+      if (!state.coffees[currentCoffeeIndexI].inCart) {
+        state.coffees[currentCoffeeIndexI].inCart = true
+        return produce(state, (draft) => {
+          draft.totalCoffeesInCart = action.payload.cond ? +1 : -1
+        })
+      }
       return produce(state, (draft) => {
-        draft.coffees[currentCoffeeIndexI].qtd = action.payload.cond ? 1 : -1
+        draft.totalCoffeesInCart = action.payload.cond ? +1 : -1
       })
     }
-
     default:
       return state
   }

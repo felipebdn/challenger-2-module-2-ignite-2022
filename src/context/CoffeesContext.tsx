@@ -14,6 +14,7 @@ interface CoffeesContextType {
   // handleAddCoffeeCart: (id: string) => void
   changeUnityCoffee: (id: string, cond: boolean) => void
   totalCoffeesInCart: number
+  total: number
 }
 export const CoffeesContext = createContext({} as CoffeesContextType)
 
@@ -24,13 +25,9 @@ export function CoffeesContextProvider({
 
   const { totalCoffeesInCart, coffees } = stateCoffees
 
-  useEffect(() => {
-    const total = coffees.filter((coffee) => coffee.inCart)
-    console.log(total.length)
-  }, [coffees])
-
   function changeUnityCoffee(id: string, cond: boolean) {
     const cycleChange = { id, cond }
+
     dispatch(incrementCoffee(cycleChange))
   }
 
@@ -65,6 +62,7 @@ export function CoffeesContextProvider({
   return (
     <CoffeesContext.Provider
       value={{
+        total,
         coffees,
         totalCoffeesInCart,
         changeUnityCoffee,

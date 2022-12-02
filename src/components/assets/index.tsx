@@ -4,12 +4,12 @@ import { CoffeesContext } from '../../context/CoffeesContext'
 import { CartContainer } from './styles'
 
 export function Cart() {
-  const { totalCoffesCart } = useContext(CoffeesContext)
+  const { totalCoffeesInCart } = useContext(CoffeesContext)
 
   return (
     <CartContainer>
       <ShoppingCart size={22} weight="fill" />
-      <span>{totalCoffesCart}</span>
+      <span>{totalCoffeesInCart}</span>
     </CartContainer>
   )
 }
