@@ -23,7 +23,8 @@ import {
 } from './styles'
 
 export function Home() {
-  const { coffees, changeUnityCoffee } = useContext(CoffeesContext)
+  const { coffees, changeUnityCoffee, handleAmountCoffeesInCart } =
+    useContext(CoffeesContext)
 
   return (
     <>
@@ -74,7 +75,7 @@ export function Home() {
       <HomeCoffees>
         <h1>Nossos cafés</h1>
         <section>
-          {coffees.map((state, i, array) => {
+          {coffees.map((state) => {
             return (
               <CartCoffes key={state.id}>
                 <HeaderCoffees>
@@ -104,7 +105,7 @@ export function Home() {
                       </button>
                     </InputNumberContainer>
                     <CartContainerHome
-                    // onClick={() => handleAddCoffeeCart(state.id)}
+                      onClick={() => handleAmountCoffeesInCart(state.id)}
                     >
                       <ShoppingCart size={22} weight="fill" />
                     </CartContainerHome>

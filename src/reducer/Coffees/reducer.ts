@@ -171,21 +171,31 @@ export function CoffeesReducer(state: CoffeesState, action: any) {
       const currentCoffeeIndexI = state.coffees.findIndex((coffee) => {
         return coffee.id === action.payload.id
       })
+      if (
+        action.payload.cond === false &&
+        state.coffees[currentCoffeeIndexI].qtd <= 1
+      ) {
+        return state
+      }
       return produce(state, (draft) => {
-        if (draft.coffees[currentCoffeeIndexI].inCart) {
-          draft.coffees[currentCoffeeIndexI].inCart = true
-        }
-        console.log(draft.coffees[currentCoffeeIndexI].qtd)
-
-        draft.coffees[currentCoffeeIndexI].qtd = action.payload.cond ? +1 : -1
+        draft.coffees[currentCoffeeIndexI].qtd += action.payload.cond ? +1 : -1
       })
     }
-    case ActionTypes.INCREMENT_COFFEE_IN_CART: {
+    case ActionTypes.CHANGE_STATUS_CONF_IN_CART: {
+      const currentCoffeeIndexI = state.coffees.findIndex((coffee) => {
+        return coffee.id === action.payload.id
+      })
+      produce(state, (draft) => {
+        console.log(draft.coffees[currentCoffeeIndexI].inCart)
+        draft.coffees[currentCoffeeIndexI].inCart = true
+        console.log(draft.coffees[currentCoffeeIndexI].inCart)
+      })
       const currentByCoffeeInCart = state.coffees.filter((coffee) => {
         return coffee.inCart === true
       }).length
       return produce(state, (draft) => {
         draft.totalCoffeesInCart = currentByCoffeeInCart
+        // console.log(draft.totalCoffeesInCart)
       })
     }
     default:

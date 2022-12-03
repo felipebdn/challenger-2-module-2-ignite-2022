@@ -1,7 +1,7 @@
-import { createContext, ReactNode, useEffect, useReducer } from 'react'
+import { createContext, ReactNode, useReducer } from 'react'
 import {
-  calculateAmountCoffeeInCart,
   changeAmountCoffee,
+  handleStatusInCart,
 } from '../reducer/Coffees/actions'
 import {
   coffeesArray,
@@ -14,9 +14,10 @@ interface CoffeesContextProviderProps {
 }
 interface CoffeesContextType {
   coffees: CoffeesProps[]
+  totalCoffeesInCart: number
   // handleAddCoffeeCart: (id: string) => void
   changeUnityCoffee: (id: string, cond: boolean) => void
-  totalCoffeesInCart: number
+  handleAmountCoffeesInCart: (id: string) => void
 }
 export const CoffeesContext = createContext({} as CoffeesContextType)
 
@@ -27,14 +28,12 @@ export function CoffeesContextProvider({
 
   const { totalCoffeesInCart, coffees } = stateCoffees
 
-  useEffect(() => {
-    dispatch(calculateAmountCoffeeInCart())
-  }, [coffees])
-
   function changeUnityCoffee(id: string, cond: boolean) {
     const cycleChange = { id, cond }
-
     dispatch(changeAmountCoffee(cycleChange))
+  }
+  function handleAmountCoffeesInCart(id: string) {
+    dispatch(handleStatusInCart(id))
   }
 
   // function handleAddCoffeeCart(id: string) {
@@ -48,7 +47,6 @@ export function CoffeesContextProvider({
   //     }),
   //   )
   // }
-
   // function handleAddUnityCoffee(id: string, cond: boolean) {
   //   setCoffees(
   //     coffees.map((state) => {
@@ -68,6 +66,7 @@ export function CoffeesContextProvider({
   return (
     <CoffeesContext.Provider
       value={{
+        handleAmountCoffeesInCart,
         coffees,
         totalCoffeesInCart,
         changeUnityCoffee,
