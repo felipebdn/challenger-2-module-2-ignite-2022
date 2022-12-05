@@ -182,7 +182,13 @@ export function CoffeesReducer(state: CoffeesState, action: any) {
           return coffee.id === action.payload.id
         })
         const data = {
-          id: prepareData,
+          id: prepareData[0].id,
+          img: prepareData[0].img,
+          qtd: prepareData[0].qtd,
+          subtitle: prepareData[0].subtitle,
+          title: prepareData[0].title,
+          typeCoffee: prepareData[0].typeCoffee,
+          valorUnidade: prepareData[0].valorUnidade,
         }
         state.coffeesInCart.push(data)
       })

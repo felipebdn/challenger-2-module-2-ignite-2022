@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useEffect, useReducer } from 'react'
+import { createContext, ReactNode, useReducer } from 'react'
 import {
   changeAmountCoffee,
   handleStatusInCart,
