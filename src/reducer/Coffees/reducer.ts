@@ -185,18 +185,15 @@ export function CoffeesReducer(state: CoffeesState, action: any) {
       const currentCoffeeIndexI = state.coffees.findIndex((coffee) => {
         return coffee.id === action.payload.id
       })
-      produce(state, (draft) => {
-        console.log(draft.coffees[currentCoffeeIndexI].inCart)
-        draft.coffees[currentCoffeeIndexI].inCart = true
-        console.log(draft.coffees[currentCoffeeIndexI].inCart)
-      })
-      const currentByCoffeeInCart = state.coffees.filter((coffee) => {
-        return coffee.inCart === true
-      }).length
-      return produce(state, (draft) => {
-        draft.totalCoffeesInCart = currentByCoffeeInCart
-        // console.log(draft.totalCoffeesInCart)
-      })
+      console.log(
+        produce(state, (draft) => {
+          if (!draft.coffees[currentCoffeeIndexI].inCart) {
+            draft.coffees[currentCoffeeIndexI].inCart = true
+          }
+        }),
+      )
+
+      return state
     }
     default:
       return state
