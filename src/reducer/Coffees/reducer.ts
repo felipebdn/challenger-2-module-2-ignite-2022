@@ -10,14 +10,23 @@ export interface CoffeesProps {
   subtitle: string
   valorUnidade: number
   qtd: number
-  inCart: boolean
 }
 interface CoffeesState {
   coffees: CoffeesProps[]
-  totalCoffeesInCart: number
+  coffeesInCart: CoffeesProps[]
 }
 export const coffeesArray = {
-  totalCoffeesInCart: 0,
+  coffeesInCart: [
+    {
+      id: uuidv4(),
+      img: 'expressoTradicional',
+      typeCoffee: ['tradicional'],
+      title: 'Expresso Tradicional',
+      subtitle: 'O tradicional café feito com água quente e grãos moídos',
+      valorUnidade: 9.9,
+      qtd: 1,
+    },
+  ],
   coffees: [
     {
       id: uuidv4(),
@@ -27,7 +36,6 @@ export const coffeesArray = {
       subtitle: 'O tradicional café feito com água quente e grãos moídos',
       valorUnidade: 9.9,
       qtd: 1,
-      inCart: false,
     },
     {
       id: uuidv4(),
@@ -37,7 +45,6 @@ export const coffeesArray = {
       subtitle: 'Expresso diluído, menos intenso que o tradicional',
       valorUnidade: 9.9,
       qtd: 1,
-      inCart: false,
     },
     {
       id: uuidv4(),
@@ -47,7 +54,6 @@ export const coffeesArray = {
       subtitle: 'Café expresso tradicional com espuma cremosa',
       valorUnidade: 9.9,
       qtd: 1,
-      inCart: false,
     },
     {
       id: uuidv4(),
@@ -57,7 +63,6 @@ export const coffeesArray = {
       subtitle: 'Bebida preparada com café expresso e cubos de gelo',
       valorUnidade: 9.9,
       qtd: 1,
-      inCart: false,
     },
     {
       id: uuidv4(),
@@ -67,7 +72,6 @@ export const coffeesArray = {
       subtitle: 'Meio a meio de expresso tradicional com leite vaporizado',
       valorUnidade: 9.9,
       qtd: 1,
-      inCart: false,
     },
     {
       id: uuidv4(),
@@ -78,7 +82,6 @@ export const coffeesArray = {
         'Uma dose de café expresso com o dobro de leite e espuma cremosa',
       valorUnidade: 9.9,
       qtd: 1,
-      inCart: false,
     },
     {
       id: uuidv4(),
@@ -89,7 +92,6 @@ export const coffeesArray = {
         'Bebida com canela feita de doses iguais de café, leite e espuma',
       valorUnidade: 9.9,
       qtd: 1,
-      inCart: false,
     },
     {
       id: uuidv4(),
@@ -99,7 +101,6 @@ export const coffeesArray = {
       subtitle: 'Café expresso misturado com um pouco de leite quente e espuma',
       valorUnidade: 9.9,
       qtd: 1,
-      inCart: false,
     },
     {
       id: uuidv4(),
@@ -109,7 +110,6 @@ export const coffeesArray = {
       subtitle: 'Café expresso com calda de chocolate, pouco leite e espuma',
       valorUnidade: 9.9,
       qtd: 1,
-      inCart: false,
     },
     {
       id: uuidv4(),
@@ -119,7 +119,6 @@ export const coffeesArray = {
       subtitle: 'Bebida feita com chocolate dissolvido no leite quente e café',
       valorUnidade: 9.9,
       qtd: 1,
-      inCart: false,
     },
     {
       id: uuidv4(),
@@ -130,7 +129,6 @@ export const coffeesArray = {
         'Drink gelado de café expresso com rum, creme de leite e hortelã',
       valorUnidade: 9.9,
       qtd: 1,
-      inCart: false,
     },
     {
       id: uuidv4(),
@@ -140,7 +138,6 @@ export const coffeesArray = {
       subtitle: 'Bebida adocicada preparada com café e leite de coco',
       valorUnidade: 9.9,
       qtd: 1,
-      inCart: false,
     },
     {
       id: uuidv4(),
@@ -150,7 +147,6 @@ export const coffeesArray = {
       subtitle: 'Bebida preparada com grãos de café árabe e especiarias',
       valorUnidade: 9.9,
       qtd: 1,
-      inCart: false,
     },
     {
       id: uuidv4(),
@@ -160,7 +156,6 @@ export const coffeesArray = {
       subtitle: 'Bebida a base de café, uísque irlandês, açúcar e chantilly',
       valorUnidade: 9.9,
       qtd: 1,
-      inCart: false,
     },
   ],
 }
@@ -168,32 +163,29 @@ export const coffeesArray = {
 export function CoffeesReducer(state: CoffeesState, action: any) {
   switch (action.type) {
     case ActionTypes.CHANGE_NUMBER_COFFEE: {
-      const currentCoffeeIndexI = state.coffees.findIndex((coffee) => {
-        return coffee.id === action.payload.id
-      })
-      if (
-        action.payload.cond === false &&
-        state.coffees[currentCoffeeIndexI].qtd <= 1
-      ) {
-        return state
-      }
       return produce(state, (draft) => {
+        const currentCoffeeIndexI = state.coffees.findIndex((coffee) => {
+          return coffee.id === action.payload.id
+        })
+        if (
+          action.payload.cond === false &&
+          state.coffees[currentCoffeeIndexI].qtd <= 1
+        ) {
+          return state
+        }
         draft.coffees[currentCoffeeIndexI].qtd += action.payload.cond ? +1 : -1
       })
     }
-    case ActionTypes.CHANGE_STATUS_CONF_IN_CART: {
-      const currentCoffeeIndexI = state.coffees.findIndex((coffee) => {
-        return coffee.id === action.payload.id
+    case ActionTypes.ADD_COFFEE_IN_CART: {
+      return produce(state, (draft) => {
+        const prepareData = draft.coffees.filter((coffee) => {
+          return coffee.id === action.payload.id
+        })
+        const data = {
+          id: prepareData,
+        }
+        state.coffeesInCart.push(data)
       })
-      console.log(
-        produce(state, (draft) => {
-          if (!draft.coffees[currentCoffeeIndexI].inCart) {
-            draft.coffees[currentCoffeeIndexI].inCart = true
-          }
-        }),
-      )
-
-      return state
     }
     default:
       return state

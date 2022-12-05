@@ -1,6 +1,6 @@
 export enum ActionTypes {
   CHANGE_NUMBER_COFFEE = 'CHANGE_NUMBER_COFFEE',
-  CHANGE_STATUS_CONF_IN_CART = 'CHANGE_STATUS_CONF_IN_CART',
+  ADD_COFFEE_IN_CART = 'CHANGE_STATUS_CONF_IN_CART',
 }
 
 interface coffeeChange {
@@ -15,7 +15,7 @@ export function changeAmountCoffee({ id, cond }: coffeeChange) {
 }
 export function handleStatusInCart(id: string) {
   return {
-    type: ActionTypes.CHANGE_STATUS_CONF_IN_CART,
+    type: ActionTypes.ADD_COFFEE_IN_CART,
     payload: { id },
   }
 }
