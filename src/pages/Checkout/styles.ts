@@ -4,7 +4,7 @@ export const CheckoutContainer = styled.form`
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding: 5rem 15rem;
+  padding: 5rem 8rem;
   gap: 2rem;
 
   main {

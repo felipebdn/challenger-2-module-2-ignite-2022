@@ -5,8 +5,12 @@ import {
   CreditCard,
   Money,
   Trash,
+  Minus,
+  Plus,
 } from 'phosphor-react'
-import { InputNumber } from '../../components/assets'
+import { useContext } from 'react'
+import { CoffeesContext } from '../../context/CoffeesContext'
+import { InputNumberContainer } from '../Home/styles'
 import {
   CheckoutContainer,
   CheckoutLeft,
@@ -22,6 +26,8 @@ import {
 } from './styles'
 
 export function Checkout() {
+  const { coffeesInCart, changeUnityCoffeeInCart } = useContext(CoffeesContext)
+
   return (
     <CheckoutContainer>
       <CheckoutLeft>
@@ -77,38 +83,38 @@ export function Checkout() {
       <CheckoutRight>
         <h1>Cafés selecionados</h1>
         <FormOrder>
-          <CoffeeCart>
-            <img src="./assets/coffees/latte.svg" alt="" />
-            <BlocoInfoCoffee>
-              <div>
-                <h2>Expresso Tradicional</h2>
-                <span>R$ 9,90</span>
-              </div>
-              <main>
-                <InputNumber />
-                <RemoverButton>
-                  <Trash size={17} />
-                  <span>Remover</span>
-                </RemoverButton>
-              </main>
-            </BlocoInfoCoffee>
-          </CoffeeCart>
-          {/* <CoffeeCart>
-            <img src="./assets/coffees/latte.svg" alt="" />
-            <BlocoInfoCoffee>
-              <div>
-                <h2>Expresso Tradicional</h2>
-                <span>R$ 9,90</span>
-              </div>
-              <main>
-                <InputNumber />
-                <RemoverButton>
-                  <Trash size={17} />
-                  <span>Remover</span>
-                </RemoverButton>
-              </main>
-            </BlocoInfoCoffee>
-          </CoffeeCart> */}
+          {coffeesInCart.map((coffee) => {
+            console.log(coffee)
+
+            return (
+              <CoffeeCart key={coffee.id}>
+                <img src={`./assets/coffees/${coffee.img}.svg`} alt="" />
+                <BlocoInfoCoffee>
+                  <div>
+                    <h2>{coffee.title}</h2>
+                    <span>R$ {coffee.valorUnidade * coffee.qtd}</span>
+                  </div>
+                  <main>
+                    <RemoverButton>
+                      <Trash size={17} />
+                      <span>Remover</span>
+                    </RemoverButton>
+                    <InputNumberContainer>
+                      <button
+                        onClick={() => changeUnityCoffee(state.id, false)}
+                      >
+                        <Minus size={14} weight="bold" />
+                      </button>
+                      <input type="number" value={state.qtd} disabled />
+                      <button onClick={() => changeUnityCoffee(state.id, true)}>
+                        <Plus size={14} weight="bold" />
+                      </button>
+                    </InputNumberContainer>
+                  </main>
+                </BlocoInfoCoffee>
+              </CoffeeCart>
+            )
+          })}
           <ValuesOrderCoffees>
             <div>
               <p>Total de itens</p>

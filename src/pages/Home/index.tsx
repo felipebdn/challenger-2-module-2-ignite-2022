@@ -1,4 +1,5 @@
 import {
+  Check,
   Coffee,
   Minus,
   Package,
@@ -106,8 +107,14 @@ export function Home() {
                     </InputNumberContainer>
                     <CartContainerHome
                       onClick={() => handleAmountCoffeesInCart(state.id)}
+                      colorButton={state.inCart}
+                      disabled={state.inCart}
                     >
-                      <ShoppingCart size={22} weight="fill" />
+                      {state.inCart ? (
+                        <Check size={22} weight="bold" />
+                      ) : (
+                        <ShoppingCart size={22} weight="fill" />
+                      )}
                     </CartContainerHome>
                   </div>
                 </FooterCoffees>

@@ -1,8 +1,8 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const HomeContainer = styled.div`
   width: 100%;
-  padding: 5rem 15rem 2rem;
+  padding: 5rem 8rem 2rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -78,7 +78,7 @@ export const CartHomeHeader = styled.div<Props>`
 `
 export const HomeCoffees = styled.div`
   width: 100%;
-  padding: 2rem 15rem;
+  padding: 2rem 8rem;
   display: flex;
   flex-direction: column;
   gap: 2.125rem;
@@ -241,11 +241,26 @@ export const InputNumberContainer = styled.div`
     }
   }
 `
-export const CartContainerHome = styled.button`
+interface CartButtonProps {
+  colorButton?: boolean
+}
+
+export const CartContainerHome = styled.button<CartButtonProps>`
   padding: 0.5rem;
   border-radius: 6px;
-  background: ${(props) => props.theme.produto['yellow-light']};
-  color: ${(props) => props.theme.produto['yellow-dark']};
+  ${(props) => {
+    if (props.colorButton) {
+      return css`
+        background: ${props.theme.base.success};
+        color: ${props.theme.base.white};
+      `
+    } else {
+      return css`
+        background: ${props.theme.produto['yellow-light']};
+        color: ${(props) => props.theme.produto['yellow-dark']};
+      `
+    }
+  }}
   position: relative;
   border: none;
   outline: none;
