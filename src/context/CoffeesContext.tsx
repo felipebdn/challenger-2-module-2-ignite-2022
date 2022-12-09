@@ -3,9 +3,11 @@ import {
   changeAmountCoffee,
   changeAmountCoffeeInCart,
   changeValueCoffeesInCart,
+  deleteCoffeeInCart,
   handleStatusInCart,
 } from '../reducer/Coffees/actions'
 import {
+  AddreesProps,
   coffeesArray,
   CoffeesProps,
   CoffeesReducer,
@@ -17,10 +19,13 @@ interface CoffeesContextProviderProps {
 interface CoffeesContextType {
   coffees: CoffeesProps[]
   coffeesInCart: CoffeesProps[]
-  // handleAddCoffeeCart: (id: string) => void
+  addrees: AddreesProps
+  valorTotalCoffees: number
+  checkCep: () => void
   changeUnityCoffee: (id: string, cond: boolean) => void
   changeUnityCoffeeInCart: (id: string, cond: boolean) => void
   handleAmountCoffeesInCart: (id: string) => void
+  deleteCoffeeById: (id: string) => void
 }
 export const CoffeesContext = createContext({} as CoffeesContextType)
 
@@ -29,10 +34,10 @@ export function CoffeesContextProvider({
 }: CoffeesContextProviderProps) {
   const [stateCoffees, dispatch] = useReducer(CoffeesReducer, coffeesArray)
 
-  const { coffees, coffeesInCart } = stateCoffees
+  const { coffees, coffeesInCart, valorTotalCoffees, addrees } = stateCoffees
 
   useEffect(() => {
-    dispatch(changeValueCoffeesInCart)
+    dispatch(changeValueCoffeesInCart())
   }, [coffeesInCart])
 
   function changeUnityCoffee(id: string, cond: boolean) {
@@ -46,37 +51,22 @@ export function CoffeesContextProvider({
     const cycleChange = { id, cond }
     dispatch(changeAmountCoffeeInCart(cycleChange))
   }
-
-  // function handleAddCoffeeCart(id: string) {
-  //   setCoffees(
-  //     coffees.map((state) => {
-  //       if (state.id === id) {
-  //         return { ...state, inCart: true }
-  //       } else {
-  //         return state
-  //       }
-  //     }),
-  //   )
-  // }
-  // function handleAddUnityCoffee(id: string, cond: boolean) {
-  //   setCoffees(
-  //     coffees.map((state) => {
-  //       if (state.id === id) {
-  //         const quantidade = state.qtd + (cond ? 1 : -1)
-  //         if (quantidade < 1) {
-  //           return state
-  //         }
-  //         return { ...state, qtd: quantidade }
-  //       } else {
-  //         return state
-  //       }
-  //     }),
-  //   )
-  // }
+  function deleteCoffeeById(id: string) {
+    dispatch(deleteCoffeeInCart(id))
+  }
+  function checkCep() {
+    fetch(`viacep.com.br/ws/68552140/json/`)
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+  }
 
   return (
     <CoffeesContext.Provider
       value={{
+        checkCep,
+        addrees,
+        deleteCoffeeById,
+        valorTotalCoffees,
         changeUnityCoffeeInCart,
         coffeesInCart,
         handleAmountCoffeesInCart,

@@ -26,7 +26,12 @@ import {
 } from './styles'
 
 export function Checkout() {
-  const { coffeesInCart, changeUnityCoffeeInCart } = useContext(CoffeesContext)
+  const {
+    coffeesInCart,
+    changeUnityCoffeeInCart,
+    valorTotalCoffees,
+    deleteCoffeeById,
+  } = useContext(CoffeesContext)
 
   return (
     <CheckoutContainer>
@@ -96,7 +101,12 @@ export function Checkout() {
                     <span>R$ {numberFormat}</span>
                   </div>
                   <main>
-                    <RemoverButton>
+                    <RemoverButton
+                      onClick={(event) => {
+                        event.preventDefault()
+                        deleteCoffeeById(coffee.id)
+                      }}
+                    >
                       <Trash size={17} />
                       <span>Remover</span>
                     </RemoverButton>
@@ -127,7 +137,9 @@ export function Checkout() {
           <ValuesOrderCoffees>
             <div>
               <p>Total de itens</p>
-              <span>R$ 29,70</span>
+              <span>
+                R$ {new Intl.NumberFormat('pt-BR').format(valorTotalCoffees)}
+              </span>
             </div>
             <div>
               <p>Entrega</p>
@@ -135,7 +147,10 @@ export function Checkout() {
             </div>
             <div>
               <p>Total</p>
-              <span>R$ {}</span>
+              <span>
+                R${' '}
+                {new Intl.NumberFormat('pt-BR').format(valorTotalCoffees + 3.5)}
+              </span>
             </div>
             <button>confirmar pedido</button>
           </ValuesOrderCoffees>

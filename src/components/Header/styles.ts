@@ -3,8 +3,7 @@ import styled from 'styled-components'
 export const HeaderContainer = styled.header`
   width: 100%;
   padding: 2rem 8rem;
-  background: #262626;
-  /* background: ${(props) => props.theme.base.background}; */
+  background: ${(props) => props.theme.base.background};
   display: flex;
 
   justify-content: space-between;
@@ -14,6 +13,49 @@ export const HeaderContainer = styled.header`
     flex-direction: row;
     align-items: center;
     gap: 0.75rem;
+  }
+`
+
+export const InputCepContainer = styled.form`
+  border: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  border-radius: 6px;
+  /* border: 1px solid ${(props) => props.theme.base['base-button']}; */
+  background: ${(props) => props.theme.base['base-input']};
+  overflow: hidden;
+
+  input {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 130%;
+    padding: 0.5rem;
+    background: none;
+    border: none;
+
+    &::placeholder {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 0.875rem;
+      line-height: 130%;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border: none;
+    background: ${(props) => props.theme.produto['purple-dark']};
+    color: ${(props) => props.theme.base.white};
   }
 `
 

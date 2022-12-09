@@ -12,14 +12,33 @@ export interface CoffeesProps {
   qtd: number
   inCart?: boolean
 }
-interface CoffeesState {
+export interface AddreesProps {
+  cep: number
+  rua: string
+  numero: number
+  complemento: string
+  bairro: string
+  cidade: string
+  uf: string
+}
+export interface CoffeesState {
   valorTotalCoffees: number
   coffeesInCart: CoffeesProps[]
   coffees: CoffeesProps[]
+  addrees: AddreesProps
 }
 export const coffeesArray = {
   coffeesInCart: [],
   valorTotalCoffees: 0,
+  addrees: {
+    cep: 0,
+    rua: '',
+    numero: 0,
+    complemento: '',
+    bairro: '',
+    cidade: '',
+    uf: '',
+  },
   coffees: [
     {
       id: uuidv4(),
@@ -224,10 +243,25 @@ export function CoffeesReducer(state: CoffeesState, action: any) {
     case ActionTypes.CHANGE_VALUE_COFFEES_IN_CART: {
       return produce(state, (draft) => {
         const valor = draft.coffeesInCart.reduce((item, i) => {
-          return item.valueOf + i.valorUnidade
-        }, draft.valorTotalCoffees)
-        console.log(valor)
+          return item + i.qtd
+        }, 0)
+        draft.valorTotalCoffees = valor * 9.9
       })
+    }
+    case ActionTypes.DELETE_COFFEE_IN_CART: {
+      return produce(state, (draft) => {
+        const coffeesEmptyId = draft.coffeesInCart.filter((coffee) => {
+          return !(coffee.id === action.payload.id)
+        })
+        const coffeeIndex = draft.coffees.findIndex((coffee) => {
+          return coffee.id === action.payload.id
+        })
+        draft.coffeesInCart = coffeesEmptyId
+        draft.coffees[coffeeIndex].inCart = false
+      })
+    }
+    case ActionTypes.CHECK_CEP: {
+      return state
     }
     default:
       return state
