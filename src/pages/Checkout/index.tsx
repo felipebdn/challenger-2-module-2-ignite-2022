@@ -84,15 +84,16 @@ export function Checkout() {
         <h1>Cafés selecionados</h1>
         <FormOrder>
           {coffeesInCart.map((coffee) => {
-            console.log(coffee)
-
+            const numberFormat = new Intl.NumberFormat('pt-BR').format(
+              coffee.valorUnidade * coffee.qtd,
+            )
             return (
               <CoffeeCart key={coffee.id}>
                 <img src={`./assets/coffees/${coffee.img}.svg`} alt="" />
                 <BlocoInfoCoffee>
                   <div>
                     <h2>{coffee.title}</h2>
-                    <span>R$ {coffee.valorUnidade * coffee.qtd}</span>
+                    <span>R$ {numberFormat}</span>
                   </div>
                   <main>
                     <RemoverButton>
@@ -101,12 +102,20 @@ export function Checkout() {
                     </RemoverButton>
                     <InputNumberContainer>
                       <button
-                        onClick={() => changeUnityCoffee(state.id, false)}
+                        onClick={(event) => {
+                          event.preventDefault()
+                          changeUnityCoffeeInCart(coffee.id, false)
+                        }}
                       >
                         <Minus size={14} weight="bold" />
                       </button>
-                      <input type="number" value={state.qtd} disabled />
-                      <button onClick={() => changeUnityCoffee(state.id, true)}>
+                      <input type="number" value={coffee.qtd} disabled />
+                      <button
+                        onClick={(event) => {
+                          event.preventDefault()
+                          changeUnityCoffeeInCart(coffee.id, true)
+                        }}
+                      >
                         <Plus size={14} weight="bold" />
                       </button>
                     </InputNumberContainer>
@@ -126,7 +135,7 @@ export function Checkout() {
             </div>
             <div>
               <p>Total</p>
-              <span>R$ 33,20</span>
+              <span>R$ {}</span>
             </div>
             <button>confirmar pedido</button>
           </ValuesOrderCoffees>

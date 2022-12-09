@@ -1,7 +1,8 @@
-import { createContext, ReactNode, useReducer } from 'react'
+import { createContext, ReactNode, useEffect, useReducer } from 'react'
 import {
   changeAmountCoffee,
   changeAmountCoffeeInCart,
+  changeValueCoffeesInCart,
   handleStatusInCart,
 } from '../reducer/Coffees/actions'
 import {
@@ -29,6 +30,10 @@ export function CoffeesContextProvider({
   const [stateCoffees, dispatch] = useReducer(CoffeesReducer, coffeesArray)
 
   const { coffees, coffeesInCart } = stateCoffees
+
+  useEffect(() => {
+    dispatch(changeValueCoffeesInCart)
+  }, [coffeesInCart])
 
   function changeUnityCoffee(id: string, cond: boolean) {
     const cycleChange = { id, cond }

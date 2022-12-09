@@ -13,11 +13,13 @@ export interface CoffeesProps {
   inCart?: boolean
 }
 interface CoffeesState {
-  coffees: CoffeesProps[]
+  valorTotalCoffees: number
   coffeesInCart: CoffeesProps[]
+  coffees: CoffeesProps[]
 }
 export const coffeesArray = {
   coffeesInCart: [],
+  valorTotalCoffees: 0,
   coffees: [
     {
       id: uuidv4(),
@@ -217,6 +219,14 @@ export function CoffeesReducer(state: CoffeesState, action: any) {
         draft.coffeesInCart[currentCoffeeIndexI].qtd += action.payload.cond
           ? +1
           : -1
+      })
+    }
+    case ActionTypes.CHANGE_VALUE_COFFEES_IN_CART: {
+      return produce(state, (draft) => {
+        const valor = draft.coffeesInCart.reduce((item, i) => {
+          return item.valueOf + i.valorUnidade
+        }, draft.valorTotalCoffees)
+        console.log(valor)
       })
     }
     default:
