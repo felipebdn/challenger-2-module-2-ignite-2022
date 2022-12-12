@@ -16,11 +16,15 @@ const cepFormValidationSchema = zod.object({
   cep: zod.number().min(8, 'Informe o seu cep'),
 })
 
+interface CepProps {
+  cep: number
+}
+
 type cepApi = zod.infer<typeof cepFormValidationSchema>
 
 export function Header() {
   const { coffeesInCart, checkCep } = useContext(CoffeesContext)
-  const { register, handleSubmit } = useForm<cepApi>({
+  const { register, handleSubmit } = useForm<CepProps>({
     resolver: zodResolver(cepFormValidationSchema),
   })
   return (
