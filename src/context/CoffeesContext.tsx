@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { createContext, ReactNode, useEffect, useReducer } from 'react'
 import {
   changeAmountCoffee,
@@ -5,6 +6,7 @@ import {
   changeValueCoffeesInCart,
   deleteCoffeeInCart,
   handleStatusInCart,
+  searchCep,
 } from '../reducer/Coffees/actions'
 import {
   AddreesProps,
@@ -16,12 +18,15 @@ import {
 interface CoffeesContextProviderProps {
   children: ReactNode
 }
+export interface cepApi {
+  cepInformado: string
+}
 interface CoffeesContextType {
   coffees: CoffeesProps[]
   coffeesInCart: CoffeesProps[]
   addrees: AddreesProps
   valorTotalCoffees: number
-  checkCep: () => void
+  checkCep: (data: cepApi) => void
   changeUnityCoffee: (id: string, cond: boolean) => void
   changeUnityCoffeeInCart: (id: string, cond: boolean) => void
   handleAmountCoffeesInCart: (id: string) => void
@@ -54,10 +59,12 @@ export function CoffeesContextProvider({
   function deleteCoffeeById(id: string) {
     dispatch(deleteCoffeeInCart(id))
   }
-  function checkCep() {
-    fetch(`viacep.com.br/ws/68552140/json/`)
-      .then((res) => res.json())
-      .then((data) => console.log(data))
+  function checkCep(data: cepApi) {
+    const api = axios.create({ baseURL: 'https://viacep.com.br' })
+    api
+      .get(`/ws/${data.cepInformado}/json/`)
+      .then((res) => console.log(res.data))
+      .catch((error) => console.log(error))
   }
 
   return (

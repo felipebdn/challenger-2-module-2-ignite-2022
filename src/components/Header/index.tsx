@@ -1,5 +1,7 @@
 import { CaretRight, MapPin, ShoppingCart } from 'phosphor-react'
 import { NavLink } from 'react-router-dom'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
 import {
   CartContainer,
   HeaderContainer,
@@ -8,22 +10,31 @@ import {
 } from './styles'
 import { useContext } from 'react'
 import { CoffeesContext } from '../../context/CoffeesContext'
+import { useForm } from 'react-hook-form'
+
+const cepFormValidationSchema = zod.object({
+  cep: zod.number().min(8, 'Informe o seu cep'),
+})
+
+type cepApi = zod.infer<typeof cepFormValidationSchema>
 
 export function Header() {
   const { coffeesInCart, checkCep } = useContext(CoffeesContext)
+  const { register, handleSubmit } = useForm<cepApi>({
+    resolver: zodResolver(cepFormValidationSchema),
+  })
   return (
     <HeaderContainer>
       <NavLink to="/">
         <img src="./assets/Logo.svg" alt="" />
       </NavLink>
       <div>
-        <InputCepContainer
-          onSubmit={(event) => {
-            event.preventDefault()
-            checkCep()
-          }}
-        >
-          <input type="text" placeholder="Digite seu cep" />
+        <InputCepContainer onSubmit={handleSubmit(checkCep)}>
+          <input
+            type="text"
+            placeholder="Digite seu cep"
+            {...register('cepInformado')}
+          />
           <button type="submit">
             <CaretRight size={22} weight="bold" />
           </button>
