@@ -18,20 +18,23 @@ import {
 interface CoffeesContextProviderProps {
   children: ReactNode
 }
-export interface cepApi {
-  cepInformado: string
+
+export interface cepProps {
+  cep: number
 }
+
 interface CoffeesContextType {
   coffees: CoffeesProps[]
   coffeesInCart: CoffeesProps[]
   addrees: AddreesProps
   valorTotalCoffees: number
-  checkCep: (data: cepApi) => void
+  checkCep: (cep: cepProps) => void
   changeUnityCoffee: (id: string, cond: boolean) => void
   changeUnityCoffeeInCart: (id: string, cond: boolean) => void
   handleAmountCoffeesInCart: (id: string) => void
   deleteCoffeeById: (id: string) => void
 }
+
 export const CoffeesContext = createContext({} as CoffeesContextType)
 
 export function CoffeesContextProvider({
@@ -59,10 +62,10 @@ export function CoffeesContextProvider({
   function deleteCoffeeById(id: string) {
     dispatch(deleteCoffeeInCart(id))
   }
-  function checkCep(data: cepApi) {
+  function checkCep(cep: cepProps) {
     const api = axios.create({ baseURL: 'https://viacep.com.br' })
     api
-      .get(`/ws/${data.cepInformado}/json/`)
+      .get(`/ws/${cep}/json/`)
       .then((res) => console.log(res.data))
       .catch((error) => console.log(error))
   }
