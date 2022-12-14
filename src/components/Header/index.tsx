@@ -9,14 +9,12 @@ import {
   LocationStyle,
 } from './styles'
 import { useContext } from 'react'
-import { cepProps, CoffeesContext } from '../../context/CoffeesContext'
+import { CoffeesContext } from '../../context/CoffeesContext'
 import { useForm } from 'react-hook-form'
 
 const cepFormValidationSchema = zod.object({
-  cep: zod.number().min(8, 'Informe o seu cep'),
+  cep: zod.number().min(8, 'Informe o seu cep').max(8),
 })
-
-//commit
 
 type cepApi = zod.infer<typeof cepFormValidationSchema>
 
@@ -25,6 +23,7 @@ export function Header() {
   const { register, handleSubmit } = useForm<cepApi>({
     resolver: zodResolver(cepFormValidationSchema),
   })
+
   return (
     <HeaderContainer>
       <NavLink to="/">

@@ -62,10 +62,10 @@ export function CoffeesContextProvider({
   function deleteCoffeeById(id: string) {
     dispatch(deleteCoffeeInCart(id))
   }
-  function checkCep(cep: cepProps) {
+  function checkCep(props: cepProps) {
     const api = axios.create({ baseURL: 'https://viacep.com.br' })
     api
-      .get(`/ws/${cep}/json/`)
+      .get(`/ws/${props.cep}/json/`)
       .then((res) => console.log(res.data))
       .catch((error) => console.log(error))
   }
