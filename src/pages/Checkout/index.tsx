@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import {
   MapPin,
   CurrencyDollar,
@@ -9,8 +10,11 @@ import {
   Plus,
 } from 'phosphor-react'
 import { useContext } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { InputsForm } from '../../components/FormCheckout'
 import { CoffeesContext } from '../../context/CoffeesContext'
 import { InputNumberContainer } from '../Home/styles'
+import * as zod from 'zod'
 import {
   CheckoutContainer,
   CheckoutLeft,
@@ -19,11 +23,22 @@ import {
   FormEndereco,
   FormOrder,
   FormPayment,
-  InputsForm,
   BlocoInfoCoffee,
   RemoverButton,
   ValuesOrderCoffees,
 } from './styles'
+
+const FormCheckoutValidationSchema = zod.object({
+  cep: zod.number().min(8).max(8),
+  rua: zod.string().min(1, 'Informe a rua'),
+  numero: zod.number().min(1, 'Informe o número'),
+  complemento: zod.string(),
+  bairro: zod.string().min(1, 'Informe o bairro'),
+  cidade: zod.string().min(1, 'Informe a cidade'),
+  uf: zod.string().min(2, 'Informe o estado').max(2),
+})
+
+type FormCheckoutData = zod.infer<typeof FormCheckoutValidationSchema>
 
 export function Checkout() {
   const {
@@ -32,6 +47,25 @@ export function Checkout() {
     valorTotalCoffees,
     deleteCoffeeById,
   } = useContext(CoffeesContext)
+
+  const FormCheckout = useForm<FormCheckoutData>({
+    resolver: zodResolver(FormCheckoutValidationSchema),
+    defaultValues: {
+      cep: undefined,
+      rua: '',
+      numero: undefined,
+      complemento: '',
+      bairro: '',
+      cidade: '',
+      uf: '',
+    },
+  })
+
+  const { handleSubmit, watch, reset } = FormCheckout
+
+  function teste(data: FormCheckoutData) {
+    console.log(data)
+  }
 
   return (
     <CheckoutContainer>
@@ -45,19 +79,9 @@ export function Checkout() {
               <p>Informe o endereço onde deseja receber seu pedido</p>
             </div>
           </aside>
-          <InputsForm>
-            <input type="number" name="" id="" placeholder="CEP" />
-            <input type="text" name="" id="" placeholder="Rua" />
-            <div>
-              <input type="number" name="" id="" placeholder="Número" />
-              <input type="text" name="" id="" placeholder="Complemento" />
-            </div>
-            <div>
-              <input type="text" name="" id="" placeholder="Bairro" />
-              <input type="text" name="" id="" placeholder="Cidade" />
-              <input type="text" name="" id="" placeholder="UF" />
-            </div>
-          </InputsForm>
+          <FormProvider {...FormCheckout}>
+            <InputsForm />
+          </FormProvider>
         </FormEndereco>
         <FormPayment>
           <header>
@@ -152,7 +176,9 @@ export function Checkout() {
                 {new Intl.NumberFormat('pt-BR').format(valorTotalCoffees + 3.5)}
               </span>
             </div>
-            <button>confirmar pedido</button>
+            <form onSubmit={handleSubmit(teste)}>
+              <button type="submit">confirmar pedido</button>
+            </form>
           </ValuesOrderCoffees>
         </FormOrder>
       </CheckoutRight>

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const CheckoutContainer = styled.form`
+export const CheckoutContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -66,41 +66,6 @@ export const FormEndereco = styled(BaseInfoCheckout)`
       line-height: 130%;
       color: ${(props) => props.theme.base['base-text']};
     }
-  }
-`
-export const InputsForm = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100% !important;
-
-  input {
-    background: ${(props) => props.theme.base['base-input']};
-    padding: 0.75rem;
-    border: 1px solid ${(props) => props.theme.base['base-button']};
-    border-radius: 4px;
-    outline: none;
-    width: 100% !important;
-
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 0.875rem;
-    line-height: 130%;
-    color: ${(props) => props.theme.base['base-text']};
-
-    &::placeholder {
-      font-family: 'Roboto';
-      font-style: normal;
-      font-size: 0.875rem;
-      line-height: 130%;
-      color: ${(props) => props.theme.base['base-label']};
-    }
-  }
-
-  div {
-    display: flex;
-    gap: 1rem;
   }
 `
 export const FormPayment = styled(BaseInfoCheckout)`
@@ -283,21 +248,23 @@ export const ValuesOrderCoffees = styled.div`
     }
   }
 
-  button {
-    padding: 0.75rem 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    border-radius: 6px;
-    border: none;
-    background: ${(props) => props.theme.produto.yellow};
+  form {
+    button {
+      padding: 0.75rem 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      border-radius: 6px;
+      border: none;
+      background: ${(props) => props.theme.produto.yellow};
 
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 0.875rem;
-    line-height: 160%;
-    text-transform: uppercase;
-    color: ${(props) => props.theme.base.white};
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.875rem;
+      line-height: 160%;
+      text-transform: uppercase;
+      color: ${(props) => props.theme.base.white};
+    }
   }
 `

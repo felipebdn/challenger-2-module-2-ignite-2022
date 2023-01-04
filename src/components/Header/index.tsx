@@ -31,11 +31,7 @@ export function Header() {
       </NavLink>
       <div>
         <InputCepContainer onSubmit={handleSubmit(checkCep)}>
-          <input
-            type="text"
-            placeholder="Digite seu cep"
-            {...register('cepInformado')}
-          />
+          <input placeholder="Digite seu cep" {...register('cepInformado')} />
           <button type="submit">
             <CaretRight size={22} weight="bold" />
           </button>

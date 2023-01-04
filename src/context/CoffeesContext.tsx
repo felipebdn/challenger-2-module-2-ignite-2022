@@ -64,6 +64,7 @@ export function CoffeesContextProvider({
   }
   function checkCep(props: cepProps) {
     const api = axios.create({ baseURL: 'https://viacep.com.br' })
+
     api
       .get(`/ws/${props.cep}/json/`)
       .then((res) => console.log(res.data))
